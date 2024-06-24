@@ -7,7 +7,7 @@ from typing import List, Optional, Tuple
 
 
 
-class Kords:
+class CoordinatesGenerator:
     """
     Класс для генерации координат точек кристаллизации.
     """
@@ -93,7 +93,7 @@ class Kords:
 
 
 
-class Main_1:
+class ClusterAnalyzer:
     """
     Класс для работы с координатами точек кристаллизации.
     """
@@ -112,9 +112,9 @@ class Main_1:
         self.box_x = box_x
         self.box_y = box_y
         self.r_cut = r_cut
-        self.cluster_matrix = None
-        self.cluster_sizes = None
-        self.density_matrix = None
+        self.cluster_matrix: Optional[np.ndarray] = None
+        self.cluster_sizes: Optional[List[int]] = None
+        self.density_matrix: Optional[np.ndarray] = None
 
 
     def func_plot_kords(self) -> None:
@@ -226,15 +226,15 @@ class Main_1:
                     density = n_cluster / (total_pixels - n_no_cluster)
                     self.density_matrix[y, x] = density
 
-        # !!!!!!!!!!!!!! Нужно доработать (неадекватное изменение значений)
-        if smo_num > 0:
-            kernel = np.array([[1/8, 1/8, 1/8], [1/8, 0, 1/8], [1/8, 1/8, 1/8]])
-            for _ in range(smo_num):
-                density_sum_before = self.density_matrix.sum()
-                d_matrix = convolve(self.density_matrix, kernel, mode='constant', cval=0.0)
-                density_sum_after = d_matrix.sum()
-                if density_sum_after != 0:
-                    self.density_matrix *= density_sum_before / density_sum_after  # нормализуем матрицу плотности
+        # !!!!!!!!!!!!!! Нужно доработать
+        # if smo_num > 0:
+        #     kernel = np.array([[1/8, 1/8, 1/8], [1/8, 0, 1/8], [1/8, 1/8, 1/8]])
+        #     for _ in range(smo_num):
+        #         density_sum_before = self.density_matrix.sum()
+        #         d_matrix = convolve(self.density_matrix, kernel, mode='constant', cval=0.0)
+        #         density_sum_after = d_matrix.sum()
+        #         if density_sum_after != 0:
+        #             self.density_matrix *= density_sum_before / density_sum_after  # нормализуем матрицу плотности
 
 
         if show_density_map:

@@ -8,15 +8,15 @@ This library provides tools for generating and analyzing crystallization points 
 
 To install the library, you can use pip:
 
-pip install crystal_analysis
+pip install git+https://github.com/vasil-gr/cluster_analysis.git
 
 ## Usage
 
 ### Generating Coordinates:
 
-from crystal_analysis import Kords
-#### Initialize the Kords class
-kords = Kords(box_x=100, box_y=100)
+from crystal_analysis import CoordinatesGenerator
+#### Initialize the CoordinatesGenerator class
+kords = CoordinatesGenerator(box_x=100, box_y=100)
 
 #### Generate random coordinates
 random_coords = kords.generate_random_kords(N_points=50)
@@ -28,10 +28,10 @@ print("Ideal Coordinates:", ideal_coords)
 
 ### Analyzing clusters:
 
-from crystal_analysis import Main_1
+from crystal_analysis import ClusterAnalyzer
 
-#### Initialize the Main_1 class
-main = Main_1(kords_list=random_coords, box_x=100, box_y=100)
+#### Initialize the ClusterAnalyzer class
+main = ClusterAnalyzer(kords_list=random_coords, box_x=100, box_y=100)
 
 #### Visualize the coordinates
 main.func_plot_kords()
@@ -62,4 +62,4 @@ print("Entropy:", entropy)
 ## Authors
 
 * Grebenyuk Vasilii - vasya.31.46@gmail.com
-* Lukiev Ivan - 456@gmail.com
+* Lukiev Ivan
