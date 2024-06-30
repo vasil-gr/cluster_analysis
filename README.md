@@ -16,41 +16,58 @@ pip install git+https://github.com/vasil-gr/cluster_analysis.git
 
 from crystal_analysis import CoordinatesGenerator
 #### Initialize the CoordinatesGenerator class
-kords = CoordinatesGenerator(box_x=100, box_y=100)
+coordinates = CoordinatesGenerator(box_x=100, box_y=100)
 
 #### Generate random coordinates
-random_coords = kords.generate_random_kords(N_points=50)
-print("Random Coordinates:", random_coords)
+random_coords = coordinates.random_spreading(N_points=50, seed=42)
 
 #### Generate ideal coordinates
-ideal_coords = kords.generate_ideal_kords(N_x_points=10)
-print("Ideal Coordinates:", ideal_coords)
+ideal_coords = coordinates.ideal_spreading(N_x_points=10)
+
+#### Generate group of coordinates
+group_coords = coordinates.add_group(50, 1600, 900)
+
+#### Add group of coordinates to other coordinates
+combined_coords = coordinates.add_group(50, 1600, 900, coords)
+
+#### Visualize the coordinates
+coordinates.show_coordinates()
 
 ### Analyzing clusters:
 
 from crystal_analysis import ClusterAnalyzer
 
 #### Initialize the ClusterAnalyzer class
-main = ClusterAnalyzer(kords_list=random_coords, box_x=100, box_y=100)
-
-#### Visualize the coordinates
-main.func_plot_kords()
+analyzer = ClusterAnalyzer(coordinates_list=random_coords, box_x=100, box_y=100)
 
 #### Generate cluster matrix
-cluster_matrix = main.generate_cluster_matrix(show_map=True)
-print("Cluster Matrix:", cluster_matrix)
+cluster_matrix = analyzer.generate_cluster_matrix()
+print("Cluster matrix: ", cluster_matrix)
 
 #### Calculate cluster sizes
-cluster_sizes = main.generate_cluster_size_list()
-print("Cluster Sizes:", cluster_sizes)
+cluster_sizes = analyzer.generate_cluster_size_list()
+print("Cluster sizes: ", cluster_sizes)
 
 #### Generate density matrix
-density_matrix = main.generate_density_matrix(show_density_map=True)
-print("Density Matrix:", density_matrix)
+density_matrix = analyzer.generate_density_matrix()
+print("Density matrix: ", density_matrix)
 
 #### Calculate entropy
-entropy = main.calculate_entropy()
-print("Entropy:", entropy)
+entropy = analyzer.calculate_entropy()
+print("Entropy: ", entropy)
+
+#### Calculate_density
+density = analyzer.calculate_density()
+print(f"Average density: {density}")
+
+#### Visualize coordinates
+analyzer.show_coordinates()
+
+#### Visualize cluster map
+analyzer.show_cluster_matrix()
+
+#### Visualize matrix densities
+analyzer.show_density_matrix()
 
 ## Dependencies
 
@@ -62,4 +79,3 @@ print("Entropy:", entropy)
 ## Authors
 
 * Grebenyuk Vasilii - vasya.31.46@gmail.com
-* Lukiev Ivan
