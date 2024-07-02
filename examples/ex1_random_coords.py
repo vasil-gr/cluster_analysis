@@ -26,6 +26,12 @@ print(f"Entropy: {entropy}")
 # Calculate average density
 density = analyzer.calculate_density()
 print(f"Average density: {density}")
+# Calculate coordination number
+coordination_number = analyzer.calculate_coordination_number()
+print(f"Сoordination number: {coordination_number}")
+
+
+
 
 # Visualize coordinates, cluster matrix, density matrix
 # analyzer.show_coordinates()

@@ -156,6 +156,27 @@ class ClusterAnalyzer:
         total_area = self.box_x * self.box_y
         density = total_points / total_area
         return density
+    
+    
+    def calculate_coordination_number(self) -> float:
+        """
+        Calculate coordination number of points.
+
+        Returns:
+        float: Coordination number value (average number of points surrounding a point).
+        """
+        total_points = len(self.coordinates_list)
+        if total_points == 0:
+            return 0
+        
+        concentration = self.box_x * self.box_y / total_points
+        radius = concentration ** 0.5
+        
+        points_array = np.array(self.coordinates_list)
+        distances = distance.cdist(points_array, points_array, 'euclidean')
+        neighbors_count = np.sum(distances <= radius, axis=1) - 1
+        coordination_number = neighbors_count.mean()
+        return coordination_number
 
 
 

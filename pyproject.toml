@@ -6,7 +6,7 @@ authors = ["Grebenyuk Vasilii <vasya.31.46@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.10"
 opencv-python = "^4.10.0.84"
 matplotlib = "^3.9.0"
 scipy = "^1.13.1"
